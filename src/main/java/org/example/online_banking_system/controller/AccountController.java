@@ -26,11 +26,13 @@ public class AccountController {
     }
 
     @PostMapping("/accounts/new")
-    public String openNewAccount(@RequestParam("accountType") String accountType,
+    public String openNewAccount(@RequestParam("accountNumber") Long accountNumber,
+                                 @RequestParam("accountType") String accountType,
                                  @RequestParam("initialDeposit") Double initialDeposit) {
-        accountService.openNewAccount(accountType, initialDeposit);
+        accountService.openNewAccount(accountNumber, accountType, initialDeposit);
         return "redirect:/";
     }
+
 
     @GetMapping("/transactions/deposit")
     public String showDepositForm(Model model) {
@@ -39,8 +41,8 @@ public class AccountController {
     }
 
     @PostMapping("/transactions/deposit")
-    public String depositMoney(@RequestParam Long accountId, @RequestParam Double amount) {
-        accountService.depositMoney(accountId, amount);
+    public String depositMoney(@RequestParam Long accountNumber, @RequestParam Double amount) {
+        accountService.depositMoney(accountNumber, amount);
         return "redirect:/"; // Redirect to home page
     }
 

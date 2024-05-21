@@ -20,4 +20,11 @@ public interface AccountRepository extends JpaRepository <Account, Long> {
 
     @Query("SELECT a.balance FROM Account a WHERE a.id = :accountId")
     Double findBalanceByAccountId(@Param("accountId") Long accountId);
+
+    Account findByAccountNumber(Long accountNumber);
+    //Spring Data JPA will automatically generate the query to find an account by its accountNumber.
+
+
+
+
 }

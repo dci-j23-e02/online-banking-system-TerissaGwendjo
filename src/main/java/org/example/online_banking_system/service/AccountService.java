@@ -18,20 +18,33 @@ public class AccountService {
     }*/
 
     @Transactional
-    public void openNewAccount(String accountType, Double initialDeposit) {
+    public void openNewAccount(Long accountNumber, String accountType, Double initialDeposit) {
         Account account = new Account();
+        account.setAccountNumber(accountNumber);
         account.setAccountType(accountType);
-        account.setBalance(initialDeposit); //initializes the balance attribute of the Account entity with
+        account.setBalance(initialDeposit);  //initializes the balance attribute of the Account entity with
         // the value of initialDeposit provided from the form.
         repository.save(account);
         //saves the Account entity to the database, ensuring the balance is initialized with the initialDeposit value.
+
     }
 
 
 
+
+
+
     @Transactional
-    public void depositMoney(Long accountId, Double amount) {
-        repository.deposit(accountId, amount);
+    public void depositMoney(Long accountNumber, Double amount) {
+        Account account = repository.findByAccountNumber(accountNumber);
+        if (account != null) {
+            Double currentBalance = account.getBalance();
+            Double newBalance = currentBalance + amount;
+            account.setBalance(newBalance);
+            repository.save(account);
+        } else {
+            throw new RuntimeException("Account not found for account number: " + accountNumber);
+        }
     }
 
     @Transactional

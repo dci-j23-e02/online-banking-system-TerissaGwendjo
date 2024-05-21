@@ -16,7 +16,7 @@ public class Account {
     @Column (name = "id", nullable = false)
     private Long id;
     @Column (nullable = false) //  indicates that the column must have a value; it cannot be NULL.
-    private String accountNumber;
+    private Long accountNumber;
 
     @Column (nullable = false)
     private Double balance;
@@ -28,12 +28,15 @@ public class Account {
     // Constructors
     public Account() {
     }
-    public Account(String accountNumber, Double balance) {
+    public Account(Long accountNumber, Double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-
+    public Account(Long accountNumber,String accountType) {
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
+    }
 
     // Getters and setters
     public Long getId() {
@@ -44,11 +47,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getAccountNumber() {
+
+    public Long getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
+    public void setAccountNumber(Long accountNumber) {
         this.accountNumber = accountNumber;
     }
 
