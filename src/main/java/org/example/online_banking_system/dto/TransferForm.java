@@ -5,25 +5,25 @@ public class TransferForm {
     software application subsystems or layers. It's essentially a plain Java object containing fields and
     corresponding getters/setters, but it serves a specific purpose: to transfer data between different parts of the application.*/
 
-    private Long fromAccountId;
-    private Long toAccountId;
+    private Long fromAccountNumber;
+    private Long toAccountNumber;
     private Double amount;
 
     // Getters and Setters
-    public Long getFromAccountId() {
-        return fromAccountId;
+    public Long getFromAccountNumber() {
+        return fromAccountNumber;
     }
 
-    public void setFromAccountId(Long fromAccountId) {
-        this.fromAccountId = fromAccountId;
+    public void setFromAccountNumber(Long fromAccountNumber) {
+        this.fromAccountNumber = fromAccountNumber;
     }
 
-    public Long getToAccountId() {
-        return toAccountId;
+    public Long getToAccountNumber() {
+        return toAccountNumber;
     }
 
-    public void setToAccountId(Long toAccountId) {
-        this.toAccountId = toAccountId;
+    public void setToAccountNumber(Long toAccountNumber) {
+        this.toAccountNumber = toAccountNumber;
     }
 
     public Double getAmount() {

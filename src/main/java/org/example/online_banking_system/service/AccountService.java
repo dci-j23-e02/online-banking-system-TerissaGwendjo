@@ -65,8 +65,26 @@ public class AccountService {
     }
 
     @Transactional
-    public void transferFunds(Long fromAccountId, Long toAccountId, Double amount) {
-        withdrawMoney(fromAccountId, amount);
-        depositMoney(toAccountId, amount);
+    public void transferFunds(Long fromAccountNumber, Long toAccountNumber, Double amount) {
+        Account fromAccount = repository.findByAccountNumber(fromAccountNumber);
+        Account toAccount = repository.findByAccountNumber(toAccountNumber);
+
+        if (fromAccount == null) {
+            throw new RuntimeException("Source account not found for account number: " + fromAccountNumber);
+        }
+
+        if (toAccount == null) {
+            throw new RuntimeException("Destination account not found for account number: " + toAccountNumber);
+        }
+
+        if (fromAccount.getBalance() < amount) {
+            throw new RuntimeException("Insufficient funds in source account");
+        }
+
+        fromAccount.setBalance(fromAccount.getBalance() - amount);
+        toAccount.setBalance(toAccount.getBalance() + amount);
+
+        repository.save(fromAccount);
+        repository.save(toAccount);
     }
 }

@@ -61,12 +61,12 @@ public class AccountController {
     @GetMapping("/transactions/transfer")
     public String showTransferForm(Model model) {
         model.addAttribute("transferForm", new TransferForm());
-        return "transfer"; // Corresponding HTML file
+        return "transfer"; // Corresponding transfer HTML file
     }
 
     @PostMapping("/transactions/transfer")
     public String transferFunds(@ModelAttribute TransferForm transferForm) {
-        accountService.transferFunds(transferForm.getFromAccountId(), transferForm.getToAccountId(), transferForm.getAmount());
+        accountService.transferFunds(transferForm.getFromAccountNumber(), transferForm.getToAccountNumber(), transferForm.getAmount());
         return "redirect:/"; // Redirect to home page
     }
 }
