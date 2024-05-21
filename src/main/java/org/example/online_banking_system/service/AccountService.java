@@ -48,12 +48,20 @@ public class AccountService {
     }
 
     @Transactional
-    public void withdrawMoney(Long accountId, Double amount) {
-        Double balance = repository.findBalanceByAccountId(accountId);
-        if (balance == null || balance < amount) {
-            throw new InsufficientFundsException(accountId);
+    public void withdrawMoney(Long accountNumber, Double amount) {
+        Account account = repository.findByAccountNumber(accountNumber);
+        if (account != null) {
+            Double currentBalance = account.getBalance();
+            if (currentBalance >= amount) {
+                Double newBalance = currentBalance - amount;
+                account.setBalance(newBalance);
+                repository.save(account);
+            } else {
+                throw new RuntimeException("Insufficient funds");
+            }
+        } else {
+            throw new RuntimeException("Account not found for account number: " + accountNumber);
         }
-        repository.withdraw(accountId, amount);
     }
 
     @Transactional

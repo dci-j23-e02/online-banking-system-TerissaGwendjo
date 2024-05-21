@@ -53,8 +53,8 @@ public class AccountController {
     }
 
     @PostMapping("/transactions/withdraw")
-    public String withdrawMoney(@RequestParam Long accountId, @RequestParam Double amount) {
-        accountService.withdrawMoney(accountId, amount);
+    public String withdrawMoney(@RequestParam Long accountNumber, @RequestParam Double amount) {
+        accountService.withdrawMoney(accountNumber, amount);
         return "redirect:/"; // Redirect to home page
     }
 
