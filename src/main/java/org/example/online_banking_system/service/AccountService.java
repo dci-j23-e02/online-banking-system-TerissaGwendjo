@@ -12,10 +12,22 @@ public class AccountService {
     @Autowired
     private AccountRepository repository;
 
-    @Transactional
+  /*  @Transactional
     public Account openNewAccount(Account account) {
         return repository.save(account);
+    }*/
+
+    @Transactional
+    public void openNewAccount(String accountType, Double initialDeposit) {
+        Account account = new Account();
+        account.setAccountType(accountType);
+        account.setBalance(initialDeposit); //initializes the balance attribute of the Account entity with
+        // the value of initialDeposit provided from the form.
+        repository.save(account);
+        //saves the Account entity to the database, ensuring the balance is initialized with the initialDeposit value.
     }
+
+
 
     @Transactional
     public void depositMoney(Long accountId, Double amount) {

@@ -26,9 +26,10 @@ public class AccountController {
     }
 
     @PostMapping("/accounts/new")
-    public String openNewAccount(@ModelAttribute Account account) {
-        accountService.openNewAccount(account);
-        return "redirect:/"; // Redirect to home page
+    public String openNewAccount(@RequestParam("accountType") String accountType,
+                                 @RequestParam("initialDeposit") Double initialDeposit) {
+        accountService.openNewAccount(accountType, initialDeposit);
+        return "redirect:/";
     }
 
     @GetMapping("/transactions/deposit")

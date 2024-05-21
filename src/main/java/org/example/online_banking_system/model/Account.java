@@ -21,6 +21,9 @@ public class Account {
     @Column (nullable = false)
     private Double balance;
 
+    @Column(nullable = false)
+    private String accountType;
+
 
     // Constructors
     public Account() {
@@ -29,6 +32,8 @@ public class Account {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
+
+
 
     // Getters and setters
     public Long getId() {
@@ -53,5 +58,13 @@ public class Account {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 }
