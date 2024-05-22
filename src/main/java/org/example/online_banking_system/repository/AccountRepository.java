@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AccountRepository extends JpaRepository <Account, Long> {
-    @Modifying
+/*    @Modifying
     @Transactional
     @Query("UPDATE Account a SET a.balance = a.balance + :amount WHERE a.id = :accountId")
     void deposit(@Param("accountId") Long accountId, @Param("amount") Double amount);
@@ -21,7 +21,7 @@ public interface AccountRepository extends JpaRepository <Account, Long> {
     void withdraw(@Param("accountId") Long accountId, @Param("amount") Double amount);
 
     @Query("SELECT a.balance FROM Account a WHERE a.id = :accountId")
-    Double findBalanceByAccountId(@Param("accountId") Long accountId);
+    Double findBalanceByAccountId(@Param("accountId") Long accountId);*/
 
     Account findByAccountNumber(Long accountNumber);
     //Spring Data JPA will automatically generate the query to find an account by its accountNumber.
