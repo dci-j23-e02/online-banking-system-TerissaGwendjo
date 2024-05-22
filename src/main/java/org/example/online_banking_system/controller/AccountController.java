@@ -65,8 +65,13 @@ public class AccountController {
     }
 
     @PostMapping("/transactions/transfer")
-    public String transferFunds(@ModelAttribute TransferForm transferForm) {
-        accountService.transferFunds(transferForm.getFromAccountNumber(), transferForm.getToAccountNumber(), transferForm.getAmount());
-        return "redirect:/"; // Redirect to home page
+    public String transferFunds(@ModelAttribute TransferForm transferForm, Model model) {
+        try {
+            accountService.transferFunds(transferForm.getFromAccountNumber(), transferForm.getToAccountNumber(), transferForm.getAmount());
+            return "redirect:/"; // Redirect to home page on success
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "transfer"; // Return to transfer form with error message
+        }
     }
 }

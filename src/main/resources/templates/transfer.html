@@ -8,14 +8,20 @@
 <body>
 <div class="container mt-4">
     <h1>Transfer Money</h1>
+    <th:block th:if="${errorMessage != null}">
+        <div class="alert alert-danger" role="alert">
+            <span th:text="${errorMessage}">Error message</span>
+        </div>
+    </th:block>
     <form th:action="@{/transactions/transfer}" method="post" class="mt-3">
         <div class="mb-3">
             <label for="fromAccount" class="form-label">From Account Number</label>
-            <input type="text" id="fromAccount" name="fromAccount" class="form-control" required>
+            <input type="text" id="fromAccount" th:field="${transferForm.fromAccountNumber}" name="fromAccount" class="form-control" required>
+
         </div>
         <div class="mb-3">
             <label for="toAccount" class="form-label">To Account Number</label>
-            <input type="text" id="toAccount" name="toAccount" class="form-control" required>
+            <input type="text" id="toAccount" th:field="${transferForm.toAccountNumber}" name="toAccount" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="amount" class="form-label">Amount</label>
