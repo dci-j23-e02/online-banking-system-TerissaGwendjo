@@ -11,7 +11,7 @@ public class AccountService {
     @Autowired
     private AccountRepository repository;
 
-    @Transactional
+    @Transactional //Ensures data consistency across multiple database operations
     public void openNewAccount(Long accountNumber, String accountType, Double initialDeposit) {
         Account account = new Account();
         account.setAccountNumber(accountNumber);

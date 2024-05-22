@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-//@RequestMapping("/accounts") //specifies the base URL path for all request mapping methods inside the controller
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -37,7 +36,7 @@ public class AccountController {
     @GetMapping("/transactions/deposit")
     public String showDepositForm(Model model) {
         model.addAttribute("accountId",0); // Dummy value
-        return "deposit"; // Corresponding HTML file
+        return "deposit"; // Corresponding  deposit HTML file
     }
 
     @PostMapping("/transactions/deposit")
