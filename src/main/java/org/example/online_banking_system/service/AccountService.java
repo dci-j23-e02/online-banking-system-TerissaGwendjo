@@ -6,15 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service // Marks this class as a Spring service bean
 public class AccountService {
     @Autowired
     private AccountRepository repository;
-
-  /*  @Transactional
-    public Account openNewAccount(Account account) {
-        return repository.save(account);
-    }*/
 
     @Transactional
     public void openNewAccount(Long accountNumber, String accountType, Double initialDeposit) {
@@ -29,14 +24,16 @@ public class AccountService {
     }
 
 
-
-
-
-
     @Transactional
     public void depositMoney(Long accountNumber, Double amount) {
+        //deposit limit set to 1000
+        final Double MAX_DEPOSIT_LIMIT = 1000.00;
+
         Account account = repository.findByAccountNumber(accountNumber);
         if (account != null) {
+            if (amount > MAX_DEPOSIT_LIMIT) {
+                throw new RuntimeException("Deposit amount exceeds the maximum limit of $" + MAX_DEPOSIT_LIMIT);
+            }
             Double currentBalance = account.getBalance();
             Double newBalance = currentBalance + amount;
             account.setBalance(newBalance);
