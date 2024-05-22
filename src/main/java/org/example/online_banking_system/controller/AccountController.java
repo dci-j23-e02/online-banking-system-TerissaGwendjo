@@ -53,9 +53,15 @@ public class AccountController {
     }
 
     @PostMapping("/transactions/withdraw")
-    public String withdrawMoney(@RequestParam Long accountNumber, @RequestParam Double amount) {
-        accountService.withdrawMoney(accountNumber, amount);
-        return "redirect:/"; // Redirect to home page
+    public String withdrawMoney(@RequestParam Long accountNumber, @RequestParam Double amount, Model model) {
+
+        try {
+            accountService.withdrawMoney(accountNumber, amount);
+            return "redirect:/"; // Redirect to home page
+        }  catch (RuntimeException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "withdraw"; // Return to withdraw form with error message
+        }
     }
 
     @GetMapping("/transactions/transfer")
