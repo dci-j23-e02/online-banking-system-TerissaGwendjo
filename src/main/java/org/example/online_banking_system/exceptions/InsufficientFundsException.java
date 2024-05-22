@@ -1,4 +1,4 @@
-package exceptions;
+package org.example.online_banking_system.exceptions;
 
 public class InsufficientFundsException extends RuntimeException{
     public InsufficientFundsException(Long accountId) {

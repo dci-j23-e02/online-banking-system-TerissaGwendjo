@@ -1,6 +1,5 @@
 package org.example.online_banking_system.service;
 
-import exceptions.InsufficientFundsException;
 import org.example.online_banking_system.model.Account;
 import org.example.online_banking_system.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
